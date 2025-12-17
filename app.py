@@ -8,9 +8,8 @@ try:
     CLIENT_ID = st.secrets["CLIENT_ID"]
     CLIENT_SECRET = st.secrets["CLIENT_SECRET"]
     PLAYLIST_URL = st.secrets["PLAYLIST_URL"]
-except Exception as e:
-    st.error(
-        "Secrets not found! Make sure secrets.toml or Streamlit Cloud Secrets are set.")
+except Exception:
+    st.error("Secrets not found! Make sure secrets.toml or Streamlit Cloud Secrets are set.")
     st.stop()
 
 MEETING_DATE = datetime(2024, 10, 8, 0, 0)
@@ -18,13 +17,19 @@ MEETING_DATE = datetime(2024, 10, 8, 0, 0)
 # --- PAGE SETUP ---
 st.set_page_config(page_title="S²: The Saga", page_icon="❤️")
 
-st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>Time till we are together</h1>",
-            unsafe_allow_html=True)
-tab1 = st.tabs("🕒 Our Journey")
+st.markdown(
+    "<h1 style='text-align: center; color: #ff4b4b;'>Time till we are together</h1>",
+    unsafe_allow_html=True
+)
+
+# --- TABS ---
+tab1 = st.tabs(["🕒 Our Journey"])[0]
 
 with tab1:
     st.header("Time Since First 'Hello'")
+
     diff = datetime.now() - MEETING_DATE
+
     col1, col2, col3 = st.columns(3)
     col1.metric("Days", diff.days)
     col2.metric("Hours", diff.seconds // 3600)
