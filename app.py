@@ -18,10 +18,6 @@ MEETING_DATE = datetime(2024, 10, 8, 0, 0)
 # --- PAGE SETUP ---
 st.set_page_config(page_title="S²: The Saga", page_icon="❤️")
 
-st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>S + S</h1>",
-            unsafe_allow_html=True)
-st.latex(r"\int_{t_0}^{\infty} (S_{me} + S_{her}) dt = \infty")
-
 tab1, tab2 = st.tabs(["🕒 Our Journey", "🎵 Our Frequency"])
 
 with tab1:
@@ -33,9 +29,6 @@ with tab1:
     col3.metric("Minutes", (diff.seconds // 60) % 60)
 
     st.write("---")
-    st.subheader("The Constants:")
-    st.write("📍 **Origin:** Instagram (Oct 8, 2024)")
-    st.write("🎀 **The Variable:** Your Hair Tie (Best Gift)")
 
 with tab2:
     st.header("The Soundtrack of Us")
@@ -55,3 +48,4 @@ with tab2:
             st.write(f"🎵 **{track['name']}** - {track['artists'][0]['name']}")
     except:
         st.warning("Check your Spotify URL or API keys.")
+
