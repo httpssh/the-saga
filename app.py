@@ -30,22 +30,7 @@ with tab1:
 
     st.write("---")
 
-with tab2:
-    st.header("The Soundtrack of Us")
-    try:
-        auth_manager = SpotifyClientCredentials(
-            client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
-        sp = spotipy.Spotify(auth_manager=auth_manager)
-        playlist = sp.playlist(PLAYLIST_URL)
 
-        col_l, col_r = st.columns([1, 2])
-        col_l.image(playlist['images'][0]['url'])
-        col_r.subheader(playlist['name'])
 
-        st.write("### Top Songs:")
-        for item in playlist['tracks']['items'][:5]:
-            track = item['track']
-            st.write(f"🎵 **{track['name']}** - {track['artists'][0]['name']}")
-    except:
-        st.warning("Check your Spotify URL or API keys.")
+
 
