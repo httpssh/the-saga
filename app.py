@@ -3,14 +3,24 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from datetime import datetime
 
-# --- CONFIGURATION FROM SECRETS --
+# --- CONFIGURATION FROM SECRETS ---
+try:
+    CLIENT_ID = st.secrets["CLIENT_ID"]
+    CLIENT_SECRET = st.secrets["CLIENT_SECRET"]
+    PLAYLIST_URL = st.secrets["PLAYLIST_URL"]
+except Exception as e:
+    st.error(
+        "Secrets not found! Make sure secrets.toml or Streamlit Cloud Secrets are set.")
+    st.stop()
 
 MEETING_DATE = datetime(2024, 10, 8, 0, 0)
 
 # --- PAGE SETUP ---
 st.set_page_config(page_title="S²: The Saga", page_icon="❤️")
 
-tab1 = st.tabs(["🕒 Our Journey"])
+st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>Time till we are together</h1>",
+            unsafe_allow_html=True)
+tab1 = st.tabs("🕒 Our Journey")
 
 with tab1:
     st.header("Time Since First 'Hello'")
@@ -19,11 +29,3 @@ with tab1:
     col1.metric("Days", diff.days)
     col2.metric("Hours", diff.seconds // 3600)
     col3.metric("Minutes", (diff.seconds // 60) % 60)
-
-    st.write("---")
-
-
-
-
-
-
